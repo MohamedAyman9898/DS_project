@@ -3,9 +3,10 @@
 
 #include<stdio.h>
 #include<conio.h>
+#include"..\INCLUDE\linkedList.h"
 
-int linSearch(int* arr, int key, int size);
-int binSearch(int* arr, int key, int size);
+int linSearch(list* list, int key);
+int binSearch(list* list, int key);
 int recSearchLin(int* arr, int key, int size, int i);
 int recSearchBin(int* arr, int key, int size, int low);
 

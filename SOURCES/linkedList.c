@@ -9,14 +9,14 @@ node* createNode(emp* emp1)
     node* temp;
     temp = (node*) malloc(sizeof(node));
     temp->emp = emp1;
-    temp->next=temp->previous=0;
+    temp->next = temp->previous = 0;
     return temp;
 }
 
 void append(list* list, emp* emp)
 {
     node* temp;
-    temp=createNode(emp);                       //adding the employee as data to node
+    temp=createNode(emp);                      //adding the employee as data to node
     if(list->start==0)      //list is empty
     {
         list->start = list->end = temp;
@@ -27,6 +27,8 @@ void append(list* list, emp* emp)
         temp->previous = list->end;
         list->end = temp;
     }
+    (list->numOfNodes)++;
+    printf("#nodes: %d",list->numOfNodes);
     return;
 }
 
@@ -97,4 +99,22 @@ int freeList(list* list)
         temp = list->start;
     }
     return 1;
+}
+
+void printList(list* list)
+{
+    node* temp;
+    temp = list->start;
+    if(temp==0)
+    {
+        printf("Empty List!\n");
+        return;
+    }
+    do
+    {
+        printf("Name: %s\n", temp->emp->name);
+        printf("code: %d\n", temp->emp->code);
+        printf("salary: %d\n\n", temp->emp->salary);
+        temp = temp->next;
+    } while (temp!=0);
 }

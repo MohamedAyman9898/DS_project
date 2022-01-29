@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "linkedlist.h": "c",
+        "search.h": "c",
+        "sorting.h": "c",
+        "conio.h": "c",
+        "MENU_V22.C": "cpp"
+    }
+}

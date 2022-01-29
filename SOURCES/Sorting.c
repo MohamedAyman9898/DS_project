@@ -3,6 +3,7 @@
 #include<conio.h>
 #include"..\INCLUDE\Sorting.h"
 
+/*
 void selectionSortRec(int *arr, int n, int j, int i,int index)
 {
     if (i < n-1)
@@ -38,33 +39,52 @@ void selectionSort(int *arr, int n)
         swap(&arr[i],&arr[index]);
     }
 }
-
-void bubleSort(int *arr, int n)
+*/
+void bubbleSort(list* list, int choice)
 {
-    int i,j,flag;
+    int i,j,flag,pos=1;
+    int n = list->numOfNodes;
+    node* temp = list->start;
     for(i=0; i<n; i++)
     {
         flag=0;
+        printf("\ni:%d\n",i);
         for(j=0; j<n-i-1; j++)
         {
-            if(arr[j] > arr[j+1])
+            printf("\ni:%d\n",j);
+            if(choice == 1)     //salary sort
             {
-                swap(&arr[j],&arr[j+1]);
-                flag=1;
+                printf("\nentered\n");
+                if( (temp->emp->salary) > (temp->next->emp->salary) )
+                {
+                    swap(temp, (temp->next) );
+                    flag=1;
+                }
             }
+            else        //alphabetic sort
+            {
+                if( (temp->emp->salary) > (temp->next->emp->salary) )
+                {
+                    swap(temp, (temp->next) );
+                    flag=1;
+                }
+            }
+            temp = temp->next;
         }
         if(flag==0)return;
     }  
 }
 
-void swap(int *n1, int *n2)
+void swap(node* n1, node* n2)
 {
     int temp;
-    temp = (*n1);
-    (*n1) = (*n2);
-    (*n2) = temp;
+    temp = n1;
+    n1->next = n2->next;
+    n2->previous = n1->previous;
+    n1->previous = n2;
+    n2->next = n1;
 }
-
+/*
 void printArr(int* arr, int n)
 {
     int i;
@@ -102,3 +122,4 @@ void merge(int*A, int*L, int leftCount, int*R, int rightCount)
     while(i<leftCount) A[k++] = L[i++];
     while(j<rightCount) A[k++] = R[j++];
 }
+*/

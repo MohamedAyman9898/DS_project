@@ -6,8 +6,9 @@
 //------------------------------
 typedef struct employee
 {
-    int code,salary;
-    char* name;
+    int code;
+    int salary;
+    char name[25];
 }emp;
 
 typedef struct node
@@ -21,6 +22,7 @@ typedef struct linkedlist
 {
     struct node *start;
     struct node *end;
+    int numOfNodes;
 }list;
 
 //------------------------
@@ -31,5 +33,6 @@ void append(list* list, emp*);
 node* search(list* list, int key);
 int delete(list* list, int key);
 int freeList(list* list);
+void printList(list* list);
 
 #endif

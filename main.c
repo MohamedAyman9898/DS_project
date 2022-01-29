@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<conio.h>
+#include<string.h>
 #include"INCLUDE\linkedList.h"
 #include"INCLUDE\Search.h"
 #include"INCLUDE\Sorting.h"
@@ -27,8 +28,9 @@
 //------------------------
 //+      Prototypes      +
 //------------------------
-int createEmp(int, int, char*,list*);
-void getData(int*, float*, char*);
+void createEmp(int, int, char*,list*);
+void getData(int*, int*, char*);
+void printSearch(node*);
 void gotoxy(int x,int y)
 {
 printf("%c[%d;%df",0x1B,y,x);
@@ -42,17 +44,20 @@ void main(void)
     int terminate=0,i,j,size,pos=0,ex=0;
     int state,selection,data;
     int code;
-    float salary;
+    int salary;
     char name[25];
     node* result;
     list list1;
     //insert menu items here
 	char menu[6][11] = {"  Add  ","  Search  ","  Delete  ","  Sort  ","  Print  ","  Exit  "};
 	char ch;
+    int choice,choice2;
 	float temp;
     list1.end=0;
     list1.start=0;
+    list1.numOfNodes=0;
     fflush(stdin);
+
 
 	do
     {
@@ -129,7 +134,26 @@ void main(void)
                     
                     case option2:       //Searching for an employee
                         system("cls");
-                        printf("big oof\n");
+                        printf("Enter employee code: ");
+                        scanf("%d",&code);
+                        printf("\nChoose searching algorithm\n");
+                        printf("Linear search -> 1\nBinary search  -> 2  ");
+                        scanf("%d",&choice);
+                        switch (choice)
+                        {
+                            case 1:     //linear search
+                                result = linSearch(&list1,code);
+                                printSearch(result);
+                                break;
+                        
+                            case 2:     //binary search
+                                result = binSearch(&list1, code);
+                                printSearch(result);
+                                break;
+
+                            default:
+                                break;
+                        }
                         getch();
                         break;
 
@@ -141,18 +165,44 @@ void main(void)
 
                     case option4:       //Sorting by salary or alphabetically
                         system("cls");
-                        printf("big oof\n");
+                        printf("Sort by salary -> 1\nSort alphabetically -> 2  ");
+                        scanf("%d",&choice);
+                        printf("\nSelect Sorting algorithm\n");
+                        printf("Selection sort -> 1\nBubble Sort -> 2\nMerge sort ->3  ");
+                        scanf("%d",&choice2);
+
+                        switch (choice)
+                        {
+                        case 1:     //sort by salary
+                            switch (choice2)
+                            {
+                            case 1:     //selection sort
+                                break;
+                            
+                            case 2:     //bubble sort                                
+                                bubbleSort(&list1, choice);
+                                break;
+                            
+                            case 3:     //merge sort
+                                break;
+
+                            default:
+                                break;
+                            }
+                            break;
+                        
+                        case 2:     //sort alphabetically
+                            break;
+
+                        default:
+                            break;
+                        }
                         getch();
                         break;
 
                     case option5:       //printing
                         system("cls");
-                        node* temp = list1.start;
-                        while(temp!=0)
-                        {
-                            printf("%s",temp->emp->name);
-                            temp = temp->next;
-                        }
+                        printList(&list1);
                         getch();
                         break;
 
@@ -172,23 +222,38 @@ void main(void)
     }while(!terminate);
 }
 
-int createEmp(int code, int salary, char* name, list* list)
+void createEmp(int code, int salary, char* name, list* list)
 {
-    emp* temp;
-    temp = (emp*)malloc(sizeof(emp));
-    temp->code = code;
-    temp->salary = salary;
-    temp->name = name;
-    append(list, temp);
-    return temp;
+    emp* newEmp;
+    newEmp = (emp*)malloc(sizeof(emp));
+    newEmp->code = code;
+    newEmp->salary = salary;
+    strcpy(newEmp->name, name);
+    append(list, newEmp);
 }
 
-void getData(int* code, float* salary, char* name)
+void getData(int* code, int* salary, char* name)
 {
-    printf("Enter new employee code: ");
-    scanf("%d", code);
     printf("Enter employee name: ");
     scanf("%s", name);
+    printf("Enter new employee code: ");
+    scanf("%d", code);
     printf("Enter employee salary: ");
-    scanf("%f", salary);
+    scanf("%d", salary);
+}
+
+void printSearch(node* result)
+{
+    if(result == 0)
+    {
+        printf("Employee doesn't exist!");
+    }
+    else
+    {
+        printf("+-------------------+\n");
+        printf("Name: %s\n",result->emp->name);
+        printf("code: %d\n",result->emp->code);
+        printf("salary: %d\n",result->emp->salary);
+        printf("+-------------------+");
+    }
 }

@@ -2,27 +2,40 @@
 #include<conio.h>
 #include"..\INCLUDE\Search.h"
 
-int linSearch(int *arr, int key, int size)
+int linSearch(list* list, int key)
 {
-    int i;
-    for(i=0;i<size; i++)
+    node* temp = list->start;
+    while( (temp) && ((temp->emp->code) != key) )
     {
-        if(key == arr[i]) return i;
+        temp = temp->next;
     }
-    return -1;
+    return temp;
 }
 
-int binSearch(int* arr, int key, int size)
+int binSearch(list* list, int key)
 {
-    int low=0,high=(size-1),mid;
+    int low=1,high=(list->numOfNodes),mid;
+    node* temp = list->start;
+    int pos = 1;
     while(low<=high)
     {
         mid = (high+low)/2;
-        if( arr[mid] == key )return mid;
-        else if ( arr[mid] > key )high=mid-1;
+        while(pos != mid)
+        {
+            temp = temp->next;
+            pos++;
+        }
+        if( (temp->emp->code) == key )
+        {
+            return temp;
+        }
+        else if ( (temp->emp->code) > key )
+        {
+            high=mid-1;
+        }
         else low=mid+1;
     }
-    return -1;
+    return 0;
 }
 
 int recSearchLin(int *arr, int key, int size, int i)
