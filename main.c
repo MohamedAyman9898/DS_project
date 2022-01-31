@@ -25,12 +25,14 @@
 #define option5      4
 #define option6      5
 
+
 //------------------------
 //+      Prototypes      +
 //------------------------
 void createEmp(int, int, char*,list*);
 void getData(int*, int*, char*);
 void printSearch(node*);
+// char *toLower(char* str);
 void gotoxy(int x,int y)
 {
 printf("%c[%d;%df",0x1B,y,x);
@@ -155,7 +157,6 @@ void main(void)
                                 break;
                         }
                         getch();
-                        break;
 
                     case option3:       //Deleting an employee
                         system("cls");
@@ -168,32 +169,21 @@ void main(void)
                         printf("Sort by salary -> 1\nSort alphabetically -> 2  ");
                         scanf("%d",&choice);
                         printf("\nSelect Sorting algorithm\n");
-                        printf("Selection sort -> 1\nBubble Sort -> 2\nMerge sort ->3  ");
+                        printf("Selection sort -> 1\nBubble Sort -> 2  ");
                         scanf("%d",&choice2);
 
-                        switch (choice)
+                        switch (choice2)
                         {
-                        case 1:     //sort by salary
-                            switch (choice2)
-                            {
-                            case 1:     //selection sort
-                                break;
-                            
-                            case 2:     //bubble sort                                
-                                bubbleSort(&list1, choice);
-                                break;
-                            
-                            case 3:     //merge sort
-                                break;
-
-                            default:
-                                break;
-                            }
+                        case 1:     //selection sort
+                            selectionSortNew(&list1, choice);
+                            printf("\nDone!\n");
                             break;
                         
-                        case 2:     //sort alphabetically
+                        case 2:     //bubble sort                         
+                            bubbleSort(&list1, choice);
+                            printf("\nDone!\n");
                             break;
-
+                        
                         default:
                             break;
                         }
@@ -206,7 +196,7 @@ void main(void)
                         getch();
                         break;
 
-                    case option6:
+                    case option6:       //terminating
                         terminate = 1;
                         break;
 
@@ -251,9 +241,11 @@ void printSearch(node* result)
     else
     {
         printf("+-------------------+\n");
-        printf("Name: %s\n",result->emp->name);
         printf("code: %d\n",result->emp->code);
+        printf("name: %s\n",result->emp->name);
         printf("salary: %d\n",result->emp->salary);
         printf("+-------------------+");
     }
 }
+
+

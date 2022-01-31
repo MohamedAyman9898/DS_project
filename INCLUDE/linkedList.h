@@ -16,6 +16,7 @@ typedef struct node
     struct employee *emp;
     struct node* next;
     struct node* previous;
+    int id;
 }node;
 
 typedef struct linkedlist
@@ -34,5 +35,6 @@ node* search(list* list, int key);
 int delete(list* list, int key);
 int freeList(list* list);
 void printList(list* list);
+void printSimple(list* list);
 
 #endif

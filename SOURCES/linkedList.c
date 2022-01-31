@@ -29,6 +29,8 @@ void append(list* list, emp* emp)
     }
     (list->numOfNodes)++;
     printf("#nodes: %d",list->numOfNodes);
+    (temp->id) = list->numOfNodes;
+    printf("#node ID: %d",temp->id);
     return;
 }
 
@@ -105,16 +107,32 @@ void printList(list* list)
 {
     node* temp;
     temp = list->start;
-    if(temp==0)
+    if(temp == NULL)
     {
         printf("Empty List!\n");
         return;
     }
+    printf("ID\tName\t\t\tSalary\n");
+    printf("--------------------------------------\n");
     do
     {
-        printf("Name: %s\n", temp->emp->name);
-        printf("code: %d\n", temp->emp->code);
-        printf("salary: %d\n\n", temp->emp->salary);
+        //printf("temp(%p) -> %p", (temp), (temp->next) );
+        printf("\n%d", temp->emp->code);
+        printf("\t%s", temp->emp->name);
+        printf("\t\t\t%d\n\n", temp->emp->salary);
         temp = temp->next;
-    } while (temp!=0);
+    } while (temp != NULL);
+}
+
+void printSimple(list* list)
+{
+    node* temp;
+    temp = list->start;
+    printf("\n");
+    do
+    {
+        printf(" %d -> ", temp->emp->salary);
+        temp = temp->next;
+    } while (temp != NULL);
+    printf("\n");
 }

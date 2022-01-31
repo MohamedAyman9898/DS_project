@@ -4,6 +4,7 @@
         "search.h": "c",
         "sorting.h": "c",
         "conio.h": "c",
-        "MENU_V22.C": "cpp"
+        "MENU_V22.C": "cpp",
+        "ENTER.C": "cpp"
     }
 }
